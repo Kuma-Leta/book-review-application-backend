@@ -1,9 +1,14 @@
-import mongoose from 'mongoose'
+
 
 const  Mongoose = require('mongoose')
 const reviewSchema=require('./reviewModel')
 const Schema=Mongoose.Schema
 const BookSchema=new Schema({
+    ISBN:{
+        type:String,
+        required:true,
+        unique:true
+    },
     author:{
         type:String,
         requred:true
@@ -12,12 +17,12 @@ const BookSchema=new Schema({
         type:String,
         requred:true
     },
-    review:[reviewSchema],
-    user:{
+    // review:[reviewSchema],
+    bookOwnerId:{
         type:Mongoose.Schema.Types.ObjectId,
         required:true,
         ref:'user'
     }
 })
-const bookModel= mongoose.model('book',BookSchema)
-export default bookModel
+const bookModel= Mongoose.model('book',BookSchema)
+module.exports=bookModel
