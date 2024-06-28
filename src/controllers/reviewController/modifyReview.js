@@ -13,7 +13,7 @@ const modifyReview = async (req, res) => {
    
     const reviewOwner = reviewsById.bookId;
     const bookOwner= await bookModel.findOne({reviewOwner})
-    if (bookOwner === req.user._id) {
+    if (bookOwner.bookOwnerId === req.user._id) {
       return res.status(404).json({
         status: "fail",
         message: "you can't edit review given for you ",
